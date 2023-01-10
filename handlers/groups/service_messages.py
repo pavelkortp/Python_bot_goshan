@@ -1,0 +1,22 @@
+from email import message
+from loader import dp, bot
+from aiogram import types
+from utils.misc import rate_limit
+from filters import IsGroup
+
+
+@rate_limit(limit=0, key='groups')
+@dp.message_handler(IsGroup(), content_types= types.ContentType.NEW_CHAT_MEMBERS)
+async def welcome_message(message: types.Message):
+    members = ", ".join([mess.get_mention(as_html=True) for mess in message.new_chat_members])
+    await message.reply(f'Привіт {members} вітаємо у чаті👋')
+
+@rate_limit(limit=0, key='groups')
+@dp.message_handler(IsGroup(), content_types=types.ContentType.LEFT_CHAT_MEMBER)
+async def left_chat_member(message: types.Message):
+
+    if message.left_chat_member.id == message.from_user.id:
+        await message.reply(f"👤{message.left_chat_member.get_mention(as_html=True)} Бувай😿")
+    else:
+        await message.reply(f"👤{message.left_chat_member.get_mention(as_html=True)} видалено з чату користувачем "
+                                f"{message.from_user.get_mention(as_html=True)}.")
