@@ -13,7 +13,7 @@ async def func(anekdots):
 
 @dp.message_handler(text = ['/anekdot', '/anekdot@M4karBot'] )
 async def get_anekdot(message: types.Message):
-    rofl = anekdots[func(anekdots)]
+    rofl = anekdots[int(func(anekdots))]
     await message.answer(text = rofl)
 
 @dp.message_handler(text = ['Да', 'да'] )

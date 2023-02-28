@@ -1,4 +1,4 @@
-from itertools import count
+
 from asyncpg import UniqueViolationError
 from utils.db_api.db_gino import db
 from utils.db_api.schemas.user import User
