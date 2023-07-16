@@ -1,27 +1,14 @@
+import random
+
 from aiogram import types
 from loader import dp
-from random import randrange
-complaints_voice = ['Клавіатуру для кого вигадали?',
-                     'У тебе що рук нема?',
-                     'Напиши, бо ми не розуміємо',
-                     'Будь ласка, прошу використовувати лише текст у цій розмові.',
-                     'Колективна ганьба тобі!','Як мило. Ти справді думаєш, що ми це будемо слухати?)',
-                     'Накладаю вето.',
-                     'О боже, ні, тільки не аудіо. Навіщо ти так з нами робиш?! Видалити! Зараз же видали!',
-                     'Будь ласка, поглянь на кількість учасників цього чату.  А тепер помнож на довжину свого войсу і порахуй, скільки сумарно нашого часу ти витрачаєш, змушуючи нас слухати твій бубніж.  І зроби висновки.',
-                     'Віртуальний ляпас тобі',
-                     'Той, хто навчив тебе розмовляти, шкодує про це кожен день',
-                     'Нам з тобою більше нема про що говорити',
-                     'Куди грощі на лікування переказувати?',
-                     'Друже, аудіоповідомлення - це вираз неповаги до всієї публіки, що зібралася тут.  Будь ласка, якщо хочеш спілкуватись, пиши нормально.',
-                     'Жодних аудіо, видали',
-                     'Войс? Знову? Якщо там не трек Kalush Orchestra - слухати не буду.',
-                     'Я не суджу про людей за першим враженням, але ти мені вже не подобаєшся'
-                     ]
-def func(complaints_voice):
-    return randrange(0, len(complaints_voice))
+
+complaints_voice = []
+with open("phrases/hate.txt", "r") as file:
+    complaints_voice = file.read().split("1")
+
 
 @dp.message_handler(content_types=['voice'])
 async def get_user_voice(message: types.Voice):
-    reaction_voice = complaints_voice[func(complaints_voice)]
+    reaction_voice = random.choice(complaints_voice)
     await message.reply(reaction_voice)

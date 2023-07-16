@@ -1,8 +1,10 @@
-from loader import dp
-from aiogram.dispatcher.filters import Command
 from aiogram import types
+from aiogram.dispatcher.filters import Command
+
 from filters import IsPrivate
 from keyboards.default import kb_menu
+from loader import dp
+
 
 @dp.message_handler(IsPrivate(), Command("menu"))
 async def menu(message: types.Message):

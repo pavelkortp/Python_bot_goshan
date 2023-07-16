@@ -1,5 +1,4 @@
 async def on_startup(dp):
-    
     import filters
 
     filters.setup(dp)
@@ -8,22 +7,23 @@ async def on_startup(dp):
 
     from loader import db
     from utils.db_api.db_gino import on_startup
-    print('connecting to postgre SQL')
+    print('connecting to postgres SQL')
     await on_startup(dp)
+
+    print('ready')
 
     print('Створення таблиць')
     await db.gino.create_all()
     print('ready')
 
-
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
-
 
     from utils.set_bot_commands import set_default_commands
     await set_default_commands(dp)
 
     print('Bot work')
+
 
 if __name__ == '__main__':
     from aiogram import executor

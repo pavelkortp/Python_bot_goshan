@@ -1,6 +1,8 @@
 from aiogram import types
-from loader import dp
+
 from filters import IsPrivate
+from loader import dp
+
 
 @dp.message_handler(IsPrivate())
 async def command_error(message: types.Message):
