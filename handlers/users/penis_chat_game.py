@@ -2,12 +2,11 @@ import random
 
 from aiogram import types
 
-from filters import IsGroup
 from loader import dp
 from utils.db_api import quick_commands as commands
 
 
-@dp.message_handler(IsGroup(), text='/penis')
+@dp.message_handler(commands='penis')
 async def command_penis(message: types.Message) -> bool:
     """
     This method is penis chat game where user send /penis and get a new penis size.
@@ -33,12 +32,12 @@ async def command_penis(message: types.Message) -> bool:
         return False
 
 
-@dp.message_handler(IsGroup(), text='/top')
+@dp.message_handler(commands='top')
 async def command_top(message: types.Message) -> bool:
     """
     This method send to user top of users penis.
     :param message: message with command 'top'
-    :return:
+    :return: True if we completely send message otherwise False
     """
     try:
         current_user = message.from_user.first_name
@@ -48,5 +47,7 @@ async def command_top(message: types.Message) -> bool:
             formatted_users += f'{i} - {user.first_name}\n'
         await message.reply(f'{current_user}\n',
                             formatted_users)
+        return True
     except Exception:
         print(Exception)
+        return False

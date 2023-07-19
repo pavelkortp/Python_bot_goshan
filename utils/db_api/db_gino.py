@@ -2,7 +2,6 @@ from data import config
 from gino import Gino
 import sqlalchemy as sa
 from typing import List
-from sqlalchemy import Column, BigInteger, String
 import datetime
 from aiogram import Dispatcher
 

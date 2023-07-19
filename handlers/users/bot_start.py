@@ -6,7 +6,7 @@ from loader import dp
 from utils.db_api import quick_commands as commands
 
 
-@dp.message_handler(text='/start')
+@dp.message_handler(commands=['start'])
 async def command_start(message: types.Message):
     """
     This method created new user and greets they. Or grate already registered user.

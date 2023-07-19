@@ -15,9 +15,3 @@ commands = [
 
 async def set_default_commands(dp):
     await dp.bot.set_my_commands(commands)
-
-
-@dp.message_handler(IsPrivate(), chat_id=admins)
-async def set_admin_commands(dp):
-    commands.append(types.BotCommand("mail", "Розсилка"))
-    await dp.bot.set_my_commands(commands)
